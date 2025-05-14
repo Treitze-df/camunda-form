@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 1rem; }
+    .html-content { border: 1px solid #ccc; padding: 1rem; background: #fafafa; }
+  </style>
+</head>
+<body>
+  <h2>Generated HTML Content</h2>
+  <div id="html-container" class="html-content">Loading...</div>
+
+  <script>
+    // Camunda SDK automatically injects 'camForm'
+    const container = document.getElementById('html-container');
+
+    // Wait until Camunda Form is initialized
+    window.camForm.on('variables-fetched', () => {
+      const html = camForm.variableManager.variableValue('ma_html_response');
+      container.innerHTML = html || '<em>No HTML content found.</em>';
+    });
+
+    camForm.on('submit', function(evt) {
+      // Add any form submission logic here, or just allow submission
+    });
+  </script>
+</body>
+</html>
